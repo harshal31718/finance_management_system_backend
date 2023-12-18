@@ -122,14 +122,8 @@ const defaultData = {
   }
 }
 
-let prevUser = null;
-app.get("/user", (req, res) => {
-  res.send(prevUser);
-})
-
 app.get("/login", async (req, res) => {
   const user = req.query.user;
-  prevUser = user;
   Axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
     headers: {
       Authorization: `Bearer ${user.access_token}`,
@@ -163,10 +157,6 @@ app.get("/login", async (req, res) => {
     })
     .catch((err) => console.log(err));
 });
-
-app.post("/logout", async (req, res) => {
-  prevUser = null;
-})
 
 app.post("/addUploadedTransactions", async (req, res) => {
   const newData = req.body.data;
