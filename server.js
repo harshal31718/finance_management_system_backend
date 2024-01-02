@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Axios = require("axios");
 require('dotenv').config()
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -13,7 +13,7 @@ app.use(cors());
 mongoose.set("strictQuery", false);
 const connectionParams = { useNewUrlParser: true, useUnifiedTopology: true }
 mongoose.connect(process.env.DATABASE_URL, connectionParams)
-  .then(() => console.log('Connected to the database '))
+  .then(() => console.log('Connected to the FMSDB'))
   .catch((err) => console.error(`Error connecting to the database. n${err}`));
 
 const dataSchema = new mongoose.Schema({
